@@ -13,9 +13,9 @@ const updateUser = (req, res) => {
     const userId = req.params['uid'];
     const updates = req.body;
     users = users.map((usr) =>
-        usr._id === userId ?
-            {...usr, ...updates} :
-            usr
+                          usr._id === userId ?
+                              {...usr, ...updates} :
+                          usr
     );
     res.sendStatus(200);
 }
@@ -23,7 +23,7 @@ const updateUser = (req, res) => {
 const deleteUser = (req, res) => {
     const userId = req.params['uid'];
     users = users.filter(usr =>
-        usr._id !== userId);
+                             usr._id !== userId);
     res.sendStatus(200);
 }
 
