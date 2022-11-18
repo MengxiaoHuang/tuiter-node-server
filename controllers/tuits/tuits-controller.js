@@ -1,14 +1,6 @@
 import posts from "./tuits.js";
 
 let tuits = posts;
-export default (app) => {
-    app.post('/api/tuits', createTuit);
-    app.get('/api/tuits', findTuits);
-    //app.get('/api/tuits/:tid', findTuitsByID);
-    app.put('/api/tuits/:tid', updateTuit);
-    app.delete('/api/tuits/:tid', deleteTuit);
-
-}
 
 const createTuit = (req, res) => {
     const newTuit = req.body;
@@ -32,9 +24,10 @@ const findTuits = (req, res) => {
 
 const updateTuit = (req, res) => {
     const tuitdIdToUpdate = req.params.tid;
+    const tidUpdate = parseInt(tuitdIdToUpdate);
     const updates = req.body;
     const tuitIndex = tuits.findIndex(
-        (t) => t._id === tuitdIdToUpdate)
+        (t) => t._id === tidUpdate)
     tuits[tuitIndex] =
         {...tuits[tuitIndex], ...updates};
     res.sendStatus(200);
@@ -42,8 +35,15 @@ const updateTuit = (req, res) => {
 
 const deleteTuit = (req, res) => {
     const tuitdIdToDelete = req.params.tid;
+    const tidUpdate = parseInt(tuitdIdToDelete);
+    //console.log(tuitdIdToDelete)
     tuits = tuits.filter((t) =>
-                             t._id !== tuitdIdToDelete);
+        t._id !== tidUpdate);
     res.sendStatus(200);
 }
-
+export default (app) => {
+    app.post('/api/tuits', createTuit);
+    app.get('/api/tuits', findTuits);
+    app.put('/api/tuits/:tid', updateTuit);
+    app.delete('/api/tuits/:tid', deleteTuit);
+}
