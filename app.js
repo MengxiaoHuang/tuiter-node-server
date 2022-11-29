@@ -11,3 +11,7 @@ TuitsController(app);
 HelloController(app);
 UserController(app);
 app.listen(process.env.PORT || 4000);
+
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
+    || 'mongodb+srv://mengxiao:mengxiao@cluster0.d96rtrh.mongodb.net/?retryWrites=true&w=majority'
+mongoose.connect(CONNECTION_STRING);
